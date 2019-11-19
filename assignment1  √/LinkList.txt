@@ -1,0 +1,206 @@
+#include "LinkList.h"
+
+
+/*
+Args: 
+    * None.
+Return: 
+    * Pointer of the head node.
+Description:
+    * Create an empty linked list with a head node.
+    * The "next" field of the head node should point to NULL.
+*/
+Node* CreateEmptyList()
+{
+	Node *head = NULL;
+	return head;
+	//Node *head = (Node*)malloc(sizeof(Node));
+	//if (head = NULL)
+	//{
+	//	printf("空间缓存不足\n");
+	//	return 0;
+	//}
+	////head->next = NULL;
+	//return head;
+}
+
+
+/*
+Args:
+    * addr: pointer of an array.
+    * n: length of the array.
+Return:
+    * Pointer of the head node.
+Description:
+    * Initialize a linked list with an array.
+*/
+Node* CreateList(DataType *addr, unsigned int n)
+{
+	Node *head = NULL;
+	//Node *p = new Node;// 
+	Node *p;
+	p = (Node*)malloc(sizeof(Node));
+	p->data = n;
+	head = p;
+	p->data = NULL;
+	/*Node *HeadNode = (Node*)malloc(sizeof(Node));
+	if (HeadNode = NULL)
+	{
+		printf("空间缓存不足。");
+		return HeadNode;
+	}
+	HeadNode->data = n;
+	HeadNode->next = NULL;	*/
+}
+
+
+/*
+Args:
+    * head: pointer of the head node.
+Returns:
+    * None
+Description:
+    * Destroy the linked list.
+    * Release all allocated memory.
+*/
+void DestroyList(Node *head)
+{
+	head = NULL;
+}
+
+
+/*
+Args:
+    * head: pointer of the head node.
+    * index: index of the inserted data.
+    * data: the inserted data.
+Returns:
+    * None.
+Description:
+    *   If the linked list is "head->3->5->2",
+    * when you call (head, 0, 6), the linked 
+    * list will be "head->6->3->5->2".
+*/
+void ListInsert(Node *head, unsigned int index, DataType data)
+{
+	//Node *NewNode = new Node;//
+	Node *NewNode;
+	NewNode = (Node*)malloc(sizeof(Node));
+
+	if (NewNode == NULL)
+	{
+		printf("空间缓存不足。");
+		//return head;
+	}
+	NewNode->data = data;
+	//Node *p = head;
+	//NewNode->data = data;
+	//NewNode->next = NULL;
+	if (index < 0) 
+	{
+		printf("指标错误，请输入一个大于等于 0 的指标");
+	}	
+	if (index == 0)
+	{		
+		//NewNode->data = data;
+		NewNode->next = head;
+		head = NewNode;
+		//NewNode->next = NULL;
+		//NewNode->next = head->next;
+		//NewNode->data = data;		//DataType temp = head->data;		//head->data = data;
+		//head->next = NewNode;//NewNode->data = temp;
+	}
+	else
+	{		
+		Node *q = head;
+		int j = 1;
+		while ((j < index) && (q->next != NULL))
+		{
+			q = q->next;
+			j++;
+		}
+		if (j == index)
+		{
+			NewNode->next = q->next;
+			q->next = NewNode;
+		}
+		else
+		{
+			printf("没有第%d个结点", index);
+		}
+
+		/*for (int i = 0; i < index; i++)
+		{
+			p = p->next;
+		}
+		NewNode->next = p->next;
+		p->next = NewNode;
+		NewNode->data = data;*/
+	}
+}
+
+
+/*
+Args:
+    * head: pointer of the head node.
+    * index: index of the deleted data.
+Returns:
+    * The deleted data.
+Description:
+    *   If the linked list is "head->3->5->2",
+    * when you call (head, 2), the linked 
+    * list will be "head->3->5".
+*/
+DataType ListDelete(Node *head, unsigned int index)
+{
+	if (index == 1)
+	{
+		Node *p = head;
+		head = head->next;
+		free(p);
+	}
+	else 
+	{
+		Node *p = head;
+		int j = 1;
+		while ((j < index - 1) && (p->next != NULL))
+		{
+			p = p->next;
+			j++;
+		}
+		if (p->next != NULL)
+		{
+			Node *q = p->next;
+			p->next = q->next;
+			free(q);
+		}
+		else
+		{
+			printf("没有第%d节点",index);
+		}
+
+	}
+	//Node* p = (Node*)malloc(sizeof(Node));
+	//Node* q = (Node*)malloc(sizeof(Node));
+	/*Node* p = head;
+	Node* q = head;
+	if (index<=0)
+	{
+		printf("请输入一个正的指标：");
+		return 0;
+	}
+	for(int i = 0; i < index; i++)
+	{
+		p = p->next;
+		q = q->next;
+	}
+	q = q->next;
+	if (q->next == NULL)
+	{
+		p->next = NULL;
+	}
+	else 
+	{		
+		p->next = q;
+	}	*/
+}
